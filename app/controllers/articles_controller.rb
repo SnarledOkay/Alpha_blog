@@ -10,5 +10,26 @@ class ArticlesController < ApplicationController
     def index
         @articles = Article.all
     end
+
+    def new
+        #initialize @article immediately upon running
+        #error handling can work well for both failed / first execution
+        @article = Article.new
+    end
+
+    def create 
+        @article = Article.new(params.require(:article).permit(:title,:description))
+        #If '@article.save' fails, that means user runs into ValidationError
+        #We just have to check if this function fails
+        if @article.save
+            #'flash' is a helper method used to display message to the user
+            #it works kinda like a hash, and we usually use 2 names 
+            flash[:notice] = "Article was created successfully!"
+            redirect_to @article #even this is possible
+        else
+            #just returns a new registration form
+            render 'new'
+        end
+    end 
 end
 
