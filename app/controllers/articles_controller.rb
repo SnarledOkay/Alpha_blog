@@ -6,5 +6,9 @@ class ArticlesController < ApplicationController
         # To convert, just add '@' before the variable
         @article = Article.find(params[:id])
     end
+
+    def index
+        @articles = Article.all
+    end
 end
 
