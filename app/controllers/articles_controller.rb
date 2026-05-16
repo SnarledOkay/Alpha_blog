@@ -17,6 +17,10 @@ class ArticlesController < ApplicationController
         @article = Article.new
     end
 
+    def edit
+        @article = Article.find(params[:id])
+    end
+
     def create 
         @article = Article.new(params.require(:article).permit(:title,:description))
         #If '@article.save' fails, that means user runs into ValidationError
@@ -31,5 +35,16 @@ class ArticlesController < ApplicationController
             render 'new'
         end
     end 
+
+    def update
+        @article = Article.find(params[:id])
+        #If stands alone, no validation occurs
+        if @article.update(params.require(:article).permit(:title,:description))
+            flash[:notice] = "Article updated successfully!"
+            redirect_to @article
+        else
+            render 'edit'
+        end
+    end
 end
 
