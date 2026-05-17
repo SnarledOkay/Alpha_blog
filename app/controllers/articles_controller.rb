@@ -1,10 +1,9 @@
 class ArticlesController < ApplicationController
+    # 'before_action': perform action before any of the listed method
+    before_action :set_article, only:[:show,:edit,:update,:destroy]
+
+    #No need for any content because action is already performed
     def show
-        #'article' is currently only available inside 'show' function
-        # It will not be recognized by the 'show' front-end
-        # Therefore, we must first turn them into an instance variable
-        # To convert, just add '@' before the variable
-        @article = Article.find(params[:id])
     end
 
     def index
@@ -18,11 +17,10 @@ class ArticlesController < ApplicationController
     end
 
     def edit
-        @article = Article.find(params[:id])
     end
 
     def create 
-        @article = Article.new(params.require(:article).permit(:title,:description))
+        @article = Article.new(article_params)
         #If '@article.save' fails, that means user runs into ValidationError
         #We just have to check if this function fails
         if @article.save
@@ -37,9 +35,8 @@ class ArticlesController < ApplicationController
     end 
 
     def update
-        @article = Article.find(params[:id])
         #If stands alone, no validation occurs
-        if @article.update(params.require(:article).permit(:title,:description))
+        if @article.update(article_params)
             flash[:notice] = "Article updated successfully!"
             redirect_to @article
         else
@@ -48,9 +45,19 @@ class ArticlesController < ApplicationController
     end
 
     def destroy
-        @article = Article.find(params[:id])
         @article.destroy
         redirect_to articles_path
+    end
+
+    #'private' is not a method - do NOT put an 'end' at the end
+    # Everything written after 'private' is a method private to this controller
+    # Functions that are used in other files MUST NOT be after 'private'
+    private
+    def set_article
+        @article = Article.find(params[:id])
+    end
+    def article_params
+        params.require(:article).permit(:title,:description)
     end
 end
 
