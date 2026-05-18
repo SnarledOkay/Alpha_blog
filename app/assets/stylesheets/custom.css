@@ -1,0 +1,54 @@
+/* Allows to override any bootstrap classes
+@ import 'bootstrap/dist/css/bootstrap'
+
+We're importing through CDN => no need for above line */
+
+.navbar {
+    background-color: black !important;
+}
+
+.nav-link {
+    color: white !important;
+    font-family: Arial, Helvetica, sans-serif !important ;
+    font-size: 16px !important ;
+}
+
+#logo {
+    float: left;
+    font-size: 16px ;
+    color: white ;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    font-weight: bold;
+}
+
+#home-container {
+    height: 500px ;
+    margin-top: 25px ;
+    background-color: lightblue;
+    padding-left: 0  !important;
+    padding-right: 0 !important;
+    /* position: relative; */
+}
+
+.jumbotron {
+    height: 100% ;
+    /* Just gives the name of image, Rails will automatically handle it */
+    background-image: url('zani.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 4rem 2rem ;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+  background-color: lightgrey;
+}
+
+
