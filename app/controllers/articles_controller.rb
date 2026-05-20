@@ -21,6 +21,7 @@ class ArticlesController < ApplicationController
 
     def create 
         @article = Article.new(article_params)
+        @article.user = User.first
         #If '@article.save' fails, that means user runs into ValidationError
         #We just have to check if this function fails
         if @article.save
