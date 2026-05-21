@@ -9,6 +9,7 @@ class User < ApplicationRecord
         length:{maximum: 105},
         format:{with: VALID_EMAIL_REGEX }
     has_secure_password
-    validates :password, length:{minimum:6}
-    validates :password_confirmation, presence: true
+    validates :password, length:{minimum:6}, allow_nil: true
+    #Only checks presence if 'new account' or 'new password is provided'
+    validates :password_confirmation, presence: true, if: -> { new_record? || !password.nil? }
 end
