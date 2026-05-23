@@ -1,3 +1,9 @@
 <h1 class="text-center mt-4">Articles Index</h1>
 
+<div class="flickr_pagination">
+    <%= will_paginate @posts, :container => false %>
+</div>
 <%= render 'article' %>
+<div class="flickr_pagination mb-2">
+    <%= will_paginate @posts, :container => false %>
+</div>

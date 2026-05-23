@@ -21,6 +21,7 @@ gem "fiddle"
 # gem "sassc-rails"
 gem 'jquery-rails'
 # gem "bootstrap-sass"
+gem 'will_paginate', '~> 4.0'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'

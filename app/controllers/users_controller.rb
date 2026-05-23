@@ -4,6 +4,10 @@ class UsersController < ApplicationController
         @articles = @user.articles
     end
 
+    def index
+        @users = User.paginate(page:params[:page],per_page:6)
+    end
+
     def new
         @user = User.new
     end
@@ -14,7 +18,7 @@ class UsersController < ApplicationController
     def update
         if @user.update(user_params)
             flash[:notice] = "Changes saved successfully!"
-            redirect_to articles_path
+            redirect_to @user
         else
             render 'edit'
         end
