@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
     before_action :find_user, only: [:show,:edit,:update,:destroy]
+    before_action :require_user, only: [:edit,:update,:destroy]
+    before_action :require_same_user, only: [:edit,:update,:destroy]
     def show
         @articles = @user.articles
     end
@@ -36,6 +38,10 @@ class UsersController < ApplicationController
     end
 
     def destroy
+        session[:user_id] = nil 
+        @user.destroy 
+        flash[:notice] = "Account and all associated articles successfully deleted!"
+        redirect_to root_path
     end
 
     private
@@ -44,5 +50,11 @@ class UsersController < ApplicationController
     end
     def user_params
         params.require(:user).permit(:username,:email,:password,:password_confirmation)
+    end
+    def require_same_user
+        if current_user != @user
+            flash[:alert] = "Unauthorized to perform this action!"
+            redirect_to @user
+        end
     end
 end

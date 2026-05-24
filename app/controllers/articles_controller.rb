@@ -1,6 +1,9 @@
 class ArticlesController < ApplicationController
     # 'before_action': perform action before any of the listed method
     before_action :set_article, only:[:show,:edit,:update,:destroy]
+    #This ordering is important for authorization purpose
+    before_action :require_user, except: [:show,:index]
+    before_action :require_owner, only: [:edit, :update, :destroy] 
 
     #No need for any content because action is already performed
     def show
