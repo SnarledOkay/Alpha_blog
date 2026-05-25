@@ -38,8 +38,9 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        session[:user_id] = nil 
         @user.destroy 
+        #Do this or else admin is logged out if he deletes an account
+        session[:user_id] = nil if @user == current_user
         flash[:notice] = "Account and all associated articles successfully deleted!"
         redirect_to root_path
     end
@@ -52,7 +53,7 @@ class UsersController < ApplicationController
         params.require(:user).permit(:username,:email,:password,:password_confirmation)
     end
     def require_same_user
-        if current_user != @user
+        if current_user != @user && !current_user.admin?
             flash[:alert] = "Unauthorized to perform this action!"
             redirect_to @user
         end

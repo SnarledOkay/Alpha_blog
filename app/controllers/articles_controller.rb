@@ -63,5 +63,11 @@ class ArticlesController < ApplicationController
     def article_params
         params.require(:article).permit(:title,:description)
     end
+    def require_owner
+        if current_user != @article.user && !current_user.admin?
+            flash[:alert] = "Unauthorized to perform this action!"
+            redirect_to @article
+        end
+    end
 end
 

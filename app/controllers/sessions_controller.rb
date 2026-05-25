@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
         if user && user.authenticate(params[:session][:password])
             #A session is essentially the refresh token stored in a cookie
             session[:user_id] = user.id
-            flash[:notice] = "Welcome, user #{user.username}"
+            flash[:notice] = "Welcome, #{user.admin? ? "admin" : "user"} #{user.username}"
             redirect_to user
         else
             flash.now[:alert] = "Invalid credentials"

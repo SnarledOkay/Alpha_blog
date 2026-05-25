@@ -24,11 +24,4 @@ class ApplicationController < ActionController::Base
         redirect_to login_path
     end
   end
-
-  def require_owner
-    if current_user != @article.user
-        flash[:alert] = "Unauthorized to perform this action!"
-        redirect_to @article
-    end
-  end
 end

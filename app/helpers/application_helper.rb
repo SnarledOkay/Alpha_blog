@@ -7,4 +7,11 @@ module ApplicationHelper
         image_tag(gravatar_url,alt: user.username,class:"rounded shadow mx-auto d-block")
     end
 
+    def flash_class(type)
+        case type
+        when 'notice' then 'alert-success'
+        when 'alert' then 'alert-danger'
+        else 'alert-secondary'
+        end
+    end
 end
