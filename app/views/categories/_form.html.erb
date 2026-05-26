@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-8">
+            <%= render 'shared/errors',obj: @category %>
+            <%= form_with(model: @category,class:"shadow p-3 mb-3 bg-success rounded", local: true, data:{turbo:false}) do |f| %>
+                <div class = "form-group row mb-3">
+                    <%= f.label :name, "Category name", class: "col-2 col-form-label text-light"%>
+                    <div class="col-10">
+                        <%= f.text_field :name, class:"form-control shadow rounded p-2",placeholder:"Enter category's name" %>
+                    </div>
+                </div>
+                <div class = "form-group d-flex justify-content-center">
+                    <%= f.submit(@category.new_record? ? "Create category" : "Update category", class: "btn btn-warning btn-lg") %>
+                </div>
+            <% end %>
+        </div>
+        <div class="text-center">
+            <%= link_to 'Cancel and Return to Categories Index', categories_path, class:"btn btn-secondary" %>
+        </div>
+    </div>
+</div>

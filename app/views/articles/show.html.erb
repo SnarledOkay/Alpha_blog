@@ -5,7 +5,14 @@
             <div class="card shadow p-3 mb-3 bg-white rounded">
                 <h5 class="card-header fst-italic fs-6 text-center">
                     Published by <%= @article.user.username %>
-                    <%= gravatar_for(@article.user) %>
+                    <%= link_to gravatar_for(@article.user), user_path(@article.user) %>
+                    <% if @article.categories.any? %>
+                        <%# Approach 1: use 'each' to iterate through list of categories %>
+                        <%# Approach 2: use 'render' to tell Rails to print out every element of list %>
+                        <div class="mt-2">
+                            <%= render @article.categories %>
+                        </div>
+                    <% end %>
                 </h5>
                 <div class="card-body">
                     <div class="card-text">

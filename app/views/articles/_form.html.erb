@@ -15,13 +15,19 @@
                         <%= f.text_area :description,rows:10, class:"form-control shadow rounded p-2",placeholder:"Description of article" %>
                     </div>
                 </div>
+                <div class = "form-group row mb-4">
+                    <%= f.label :category,"Categories", class: "col-2 col-form-label text-light"%>
+                    <div class="col-10">
+                        <%= f.collection_select :category_ids, Category.all, :id, :name, {prompt: "Select categories (can be empty)"}, {multiple: true, size: 3, class:"form-select shadow rounded"} %>
+                    </div>
+                </div>
                 <div class = "form-group d-flex justify-content-center">
                     <%= f.submit class: "btn btn-warning btn-lg" %>
                 </div>
             <% end %>
         </div>
         <div class="text-center">
-            <%= link_to 'Cancel and Return to Index', articles_path, class:"btn btn-secondary" %>
+            <%= link_to 'Cancel and Return to Articles Index', articles_path, class:"btn btn-secondary" %>
         </div>
     </div>
 </div>
